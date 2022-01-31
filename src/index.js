@@ -38,8 +38,35 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let stuff = "";
+    let growBox = "";
+    for(i=0; i<expr.length; i += 2){
+        if (expr[i]==='1' && expr[i+1]==='0'){
+            growBox += ".";
+            if((i + 2) % 10 === 0){
+                stuff += MORSE_TABLE[`${growBox}`];
+                growBox = "";
+            }
+          
+        }
+        if (expr[i]==='1' && expr[i+1]==='1'){
+            growBox += "-";
+            if((i + 2) % 10 === 0){
+                stuff += MORSE_TABLE[`${growBox}`];
+                growBox = "";
+            }
+        }
+        if (expr[i]==='*' && (i + 2) % 10 === 0){
+            stuff += " ";
+            growBox = "";
+        }
+        
+
+    }
+    return stuff;
 }
+
+
 
 module.exports = {
     decode
